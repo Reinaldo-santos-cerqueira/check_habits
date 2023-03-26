@@ -1,7 +1,7 @@
+import React from 'react'
 import { AuthContextProvider } from './contexts/contextApi'
 import { NavigationContainer } from '@react-navigation/native'
 import { AuthRoutesLogin } from './routes/login.routes'
-
 const App = () => {
   return (
 

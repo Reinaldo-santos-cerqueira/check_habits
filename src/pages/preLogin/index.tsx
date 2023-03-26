@@ -5,7 +5,7 @@ import BtnPrimary from '../../components/btnPrimary'
 import BtnSecondary from '../../components/btnSecondary'
 import { LoginNavigationProp } from '../../types/navigations'
 import { useNavigation } from '@react-navigation/native'
-import { goLogin, goSignUp } from '../../functions/preLogin'
+import { goLogin, goSignUp } from '../../utils/index'
 
 const PreLogin: React.FC = () => {
   const navigation = useNavigation<LoginNavigationProp>()
@@ -21,13 +21,13 @@ const PreLogin: React.FC = () => {
           }
         } />
       <BtnSecondary
-        text='CADASTRAR-SE'
+        text='SIGN - UP'
         handleClick={
           () => {
             goSignUp(navigation)
           }
         }
-        marginBottom={'0px'}
+        marginBottom={'-50px'}
       />
     </Background>
   )

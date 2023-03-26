@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useState } from 'react'
 
 interface IAuthContext {
-  id:string,
+  id: string,
+  setId: (refreshToken: string) => void,
   refreshToken:string,
-  setRefreshToken: any,
+  setRefreshToken: (refreshToken:string) => void,
   logged: boolean,
-  setLogged:any
+  setLogged: (logged: boolean) => void
 }
 
 interface IProvider {
@@ -16,8 +16,9 @@ interface IProvider {
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 export const AuthContextProvider : React.FC<IProvider> = ({ children }) => {
-  const [refreshToken, setRefreshToken] = useState('')
-  const [logged, setLogged] = useState(false)
+  const [refreshToken, setRefreshToken] = useState<string>('')
+  const [logged, setLogged] = useState<boolean>(false)
+  const [id, setId] = useState<string>('')
   return (
 
     <AuthContext.Provider
@@ -27,9 +28,10 @@ export const AuthContextProvider : React.FC<IProvider> = ({ children }) => {
             {
               logged,
               setLogged,
-              id: '',
+              id,
               refreshToken,
-              setRefreshToken
+              setRefreshToken,
+              setId
             }
 
         }

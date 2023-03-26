@@ -1,76 +1,57 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Background from '../../components/bg'
 import Logo from '../../components/logo'
 import BtnPrimary from '../../components/btnPrimary'
 import BtnSecondary from '../../components/btnSecondary'
 import Input from '../../components/input'
-import { LoginNavigationProp } from '../../types/navigations'
 import { useNavigation } from '@react-navigation/native'
-import { goChangePassword, login } from '../../utils/index'
+import { LoginNavigationProp } from '../../types/navigations'
 import { Modal } from 'react-native'
 import ModalAlert from '../../components/modal'
-import { AuthContext } from '../../contexts/contextApi'
+import { goLogin, changePassword } from '../../utils/index'
 
-const Login: React.FC = () => {
+export const ChangePassword: React.FC = () => {
   const navigation = useNavigation<LoginNavigationProp>()
+
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [modal, setModal] = useState(false)
   const [image, setImage] = useState('')
   const [text, setText] = useState('')
-  const {
-    setRefreshToken,
-    setId,
-    setLogged
-  } = useContext(AuthContext)
+
   return (
     <Background>
-      <Logo/>
+      <Logo />
       <Input
         nameIcon={'envelope-o'}
-        placeHolder={'Enter your email'}
+        placeHolder={'Enter seu email'}
         input={email}
         setInput={setEmail}
         secureTextEntry={false}
-
-      />
-
-      <Input
-        nameIcon={'lock'}
-        placeHolder={'Enter your password'}
-        input={password}
-        setInput={setPassword}
-        secureTextEntry={true}
-
       />
 
       <BtnPrimary
-        text={'LOGIN'}
+        text={'CHANGE PASSWORD'}
         handleClick={
           () => {
-            login(
+            changePassword(
               email,
-              password,
               setModal,
               setImage,
-              setText,
-              setLogged,
-              setId,
-              setRefreshToken
-
+              setText
             )
           }
         }
       />
       <BtnSecondary
-        text='CHANGE PASSWORD'
+        text='BACK TO LOGIN'
         handleClick={
           () => {
-            goChangePassword(navigation)
+            goLogin(navigation)
           }
         }
-        marginBottom={'50px'}
+        marginBottom={'0px'}
       />
+
       <Modal
 
         visible={modal}
@@ -85,14 +66,13 @@ const Login: React.FC = () => {
           setModal={setModal}
           funcNaviCorrect={
             () => {
-              navigation.navigate('InitialDrawer')
+              navigation.navigate('Login')
             }
           }
         />
 
       </Modal>
+
     </Background>
   )
 }
-
-export default Login
